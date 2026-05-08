@@ -1,0 +1,551 @@
+{
+  "info": {
+    "_postman_id": "e1e2fa7c-4215-43a6-ac89-2171e8e4151b",
+    "name": "School Management Backend API",
+    "description": "Production-grade School Management Backend API built using Node.js, Express.js, MySQL, Sequelize ORM, and Zod validation.\n\nFeatures:\n\n- Add School API\n    \n- List Schools by Distance\n    \n- Haversine Formula\n    \n- Centralized Error Handling\n    \n- Rate Limiting\n    \n- Security Middleware\n    \n- Structured API Responses\n    \n- Production-grade Backend Architecture",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33476595",
+    "_collection_link": "https://go.postman.co/collection/33476595-e1e2fa7c-4215-43a6-ac89-2171e8e4151b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "health"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Health Check",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": ":status",
+              "value": 200
+            },
+            {
+              "key": "date",
+              "value": "Fri, 08 May 2026 18:35:10 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "112"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"94-H+DE/sViNShqpnGchGIqEoz5BCE\""
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "ratelimit-limit",
+              "value": "100"
+            },
+            {
+              "key": "ratelimit-policy",
+              "value": "100;w=900"
+            },
+            {
+              "key": "ratelimit-remaining",
+              "value": "95"
+            },
+            {
+              "key": "ratelimit-reset",
+              "value": "780"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "rndr-id",
+              "value": "b2252105-a923-4474"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "vary",
+              "value": "Origin, Accept-Encoding, Accept-Encoding"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "Render"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "cf-ray",
+              "value": "9f8a900f0f42066f-BOM"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"message\": \"Server is running successfully\",\n    \"environment\": \"production\",\n    \"uptime\": 126.953468955,\n    \"timestamp\": \"2026-05-08T18:35:10.738Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Sunrise Senior Secondary School\",\r\n    \"address\": \"Jaipur, Rajasthan\",\r\n    \"latitude\": 26.9124,\r\n    \"longitude\": 75.7873\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/schools/addSchool",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "schools",
+            "addSchool"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Add School",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Sunrise Senior Secondary School\",\r\n    \"address\": \"Jaipur, Rajasthan\",\r\n    \"latitude\": 26.9124,\r\n    \"longitude\": 75.7873\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/schools/addSchool",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "schools",
+                "addSchool"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": ":status",
+              "value": 201
+            },
+            {
+              "key": "date",
+              "value": "Fri, 08 May 2026 18:38:05 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "174"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"104-kMZZyqW/sZb9ZBdszMjdK3Zni2U\""
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "ratelimit-limit",
+              "value": "100"
+            },
+            {
+              "key": "ratelimit-policy",
+              "value": "100;w=900"
+            },
+            {
+              "key": "ratelimit-remaining",
+              "value": "94"
+            },
+            {
+              "key": "ratelimit-reset",
+              "value": "606"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "rndr-id",
+              "value": "d983a5ea-3513-4359"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "vary",
+              "value": "Origin, Accept-Encoding, Accept-Encoding"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "Render"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "cf-ray",
+              "value": "9f8a944e298e3b4c-BOM"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"message\": \"School created successfully\",\n    \"data\": {\n        \"id\": 9,\n        \"name\": \"Sunrise Senior Secondary School\",\n        \"address\": \"Jaipur, Rajasthan\",\n        \"latitude\": 26.9124,\n        \"longitude\": 75.7873,\n        \"updatedAt\": \"2026-05-08T18:38:04.697Z\",\n        \"createdAt\": \"2026-05-08T18:38:04.697Z\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Schools By Distance",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/schools/listSchools?latitude=19.0760&longitude=72.8777",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "schools",
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "19.0760"
+            },
+            {
+              "key": "longitude",
+              "value": "72.8777"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "List Schools By Distance",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/schools/listSchools?latitude=19.0760&longitude=72.8777",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "schools",
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "19.0760"
+                },
+                {
+                  "key": "longitude",
+                  "value": "72.8777"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": ":status",
+              "value": 200
+            },
+            {
+              "key": "date",
+              "value": "Fri, 08 May 2026 18:38:36 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-encoding",
+              "value": "br"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"4cd-sJtTKKx53J7ZwgtqSqh55IGHo/w\""
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "ratelimit-limit",
+              "value": "100"
+            },
+            {
+              "key": "ratelimit-policy",
+              "value": "100;w=900"
+            },
+            {
+              "key": "ratelimit-remaining",
+              "value": "93"
+            },
+            {
+              "key": "ratelimit-reset",
+              "value": "575"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "rndr-id",
+              "value": "3fc8068b-fdbe-40ce"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "vary",
+              "value": "Origin, Accept-Encoding"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "Render"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "cf-ray",
+              "value": "9f8a950debc63b4c-BOM"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"message\": \"Schools fetched successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"ABC School\",\n            \"address\": \"Mumbai\",\n            \"latitude\": 19.076,\n            \"longitude\": 72.8777,\n            \"distanceInKm\": 0\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Mumbai Public School\",\n            \"address\": \"Mumbai, Maharashtra\",\n            \"latitude\": 19.076,\n            \"longitude\": 72.8777,\n            \"distanceInKm\": 0\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Pune International Academy\",\n            \"address\": \"Pune, Maharashtra\",\n            \"latitude\": 18.5204,\n            \"longitude\": 73.8567,\n            \"distanceInKm\": 120.15\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Green Valley High School\",\n            \"address\": \"Nashik, Maharashtra\",\n            \"latitude\": 19.9975,\n            \"longitude\": 73.7898,\n            \"distanceInKm\": 140.12\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Hyderabad Central School\",\n            \"address\": \"Hyderabad, Telangana\",\n            \"latitude\": 17.385,\n            \"longitude\": 78.4867,\n            \"distanceInKm\": 621.46\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Bengaluru Tech School\",\n            \"address\": \"Bengaluru, Karnataka\",\n            \"latitude\": 12.9716,\n            \"longitude\": 77.5946,\n            \"distanceInKm\": 845.32\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Jaipur Royal Academy\",\n            \"address\": \"Jaipur, Rajasthan\",\n            \"latitude\": 26.9124,\n            \"longitude\": 75.7873,\n            \"distanceInKm\": 920.74\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Sunrise Senior Secondary School\",\n            \"address\": \"Jaipur, Rajasthan\",\n            \"latitude\": 26.9124,\n            \"longitude\": 75.7873,\n            \"distanceInKm\": 920.74\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Delhi Modern School\",\n            \"address\": \"New Delhi\",\n            \"latitude\": 28.6139,\n            \"longitude\": 77.209,\n            \"distanceInKm\": 1148.09\n        }\n    ]\n}"
+        }
+      ]
+    }
+  ]
+}
